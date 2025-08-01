@@ -1,1 +1,192 @@
+/* Estilos Generales y Tipografía */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap');
 
+:root {
+    --color-fondo: #fff5f8; /* Rosa muy pálido */
+    --color-texto: #5c5c5c;
+    --color-ramo: #ffffff;
+    --color-ramo-aprobado: #d4edda; /* Verde pastel */
+    --color-ramo-bloqueado: #f8f9fa; /* Gris claro */
+    --color-texto-bloqueado: #ced4da;
+    --color-borde: #fae0e4; /* Rosa pastel */
+    --color-sombra: rgba(255, 182, 193, 0.3); /* Sombra rosada */
+    --color-notificacion-error: #f8d7da; /* Rojo pastel */
+    --color-notificacion-exito: #d1ecf1; /* Azul pastel */
+    --fuente-principal: 'Quicksand', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+/* Contenedor Principal de la Malla */
+.malla-container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 var(--color-sombra);
+    backdrop-filter: blur(4px);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px dashed var(--color-borde);
+    padding-bottom: 20px;
+}
+
+header h1 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #e56b6f; /* Rosa más intenso */
+}
+
+#reset-button {
+    background-color: #ffcad4;
+    color: var(--color-texto);
+    border: 1px solid var(--color-borde);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+#reset-button:hover {
+    background-color: #e56b6f;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Estructura de la Malla (Grid Responsivo) */
+#malla {
+    display: flex;
+    flex-wrap: nowrap; /* Evita que las columnas salten hacia abajo */
+    overflow-x: auto; /* Permite scroll horizontal en móviles */
+    padding-bottom: 20px; /* Espacio para la barra de scroll */
+    gap: 20px;
+}
+
+.semestre {
+    flex: 0 0 220px; /* Ancho fijo para cada columna de semestre */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid var(--color-borde);
+}
+
+.semestre h2 {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #b5838d; /* Malva */
+    border-bottom: 1px solid var(--color-borde);
+    padding-bottom: 10px;
+}
+
+/* Estilos de cada Ramo (Tarjeta) */
+.ramo, .hito {
+    background-color: var(--color-ramo);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-left: 5px solid #ffcad4; /* Borde rosa pastel */
+    box-shadow: 0 2px 5px var(--color-sombra);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.ramo:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 4px 10px var(--color-sombra);
+}
+
+/* Estados de los Ramos */
+.ramo.aprobado {
+    background-color: var(--color-ramo-aprobado);
+    border-left-color: #81c784; /* Verde */
+    text-decoration: line-through;
+    text-decoration-color: #8d8d8d;
+    opacity: 0.8;
+}
+
+.ramo.bloqueado {
+    background-color: var(--color-ramo-bloqueado);
+    border-left-color: #e0e0e0;
+    color: var(--color-texto-bloqueado);
+    cursor: not-allowed;
+}
+
+/* Hitos Especiales (Licenciatura, Título) */
+.hito {
+    background-color: #fff1e6; /* Melocotón claro */
+    border-left-color: #ffd6a5;
+    text-align: center;
+    font-weight: bold;
+    cursor: default;
+}
+
+.hito.obtenido {
+    background-color: #cce5ff; /* Azul muy claro */
+    border-left-color: #80bfff;
+    color: #004085;
+}
+
+/* Notificaciones */
+#notificacion {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-weight: 500;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#notificacion.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -10px);
+}
+
+#notificacion.error {
+    background-color: var(--color-notificacion-error);
+    color: #721c24;
+}
+
+#notificacion.exito {
+    background-color: var(--color-notificacion-exito);
+    color: #0c5460;
+}
+
+/* Para que la barra de scroll se vea mejor */
+#malla::-webkit-scrollbar {
+    height: 8px;
+}
+
+#malla::-webkit-scrollbar-thumb {
+    background: #ffcad4;
+    border-radius: 10px;
+}
+
+#malla::-webkit-scrollbar-track {
+    background: #fff0f3;
+}
